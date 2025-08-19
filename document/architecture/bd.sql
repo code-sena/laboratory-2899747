@@ -29,13 +29,22 @@ CREATE TABLE Order(
     status VARCHAR(50) NOT NULL,
     total DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (customer_id) REFERENCES Customer(id)
-)
+);
 create table city (
     id int primary key auto_increment,
     name varchar(100) not null unique,
     active boolean default true,
     department_id int not null,
     foreign key (department_id) references department(id)
+);
+
+-- entity Neighborhood
+CREATE TABLE Neighborhood (
+    id INT AUTO_INCREMET PRIMARY KEY,
+    neighborhoodName VARCHAR(100) NOT NULL UNIQUE,
+    active BOOLEAN NOT NULL DEFAULT TRUE,
+    city_id INT NOT NULL,
+    FOREIGN KEY (city_id) REFERENCES City(id)
 );
 
 -- Tables
@@ -105,3 +114,12 @@ CREATE TABLE Inventory (
     FOREIGN KEY (product_id) REFERENCES Product(id)
 );
 
+CREATE TABLE ProductTracking (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  shipment_id INT NOT NULL,
+  shipment_status_id INT NOT NULL,
+  location VARCHAR(255),
+  update_time DATETIME,
+  FOREIGN KEY (shipment_id) REFERENCES Shipment(id),
+  FOREIGN KEY (shipment_status_id) REFERENCES ShipmentStatus(id)
+);
