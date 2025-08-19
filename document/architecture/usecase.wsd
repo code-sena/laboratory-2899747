@@ -158,17 +158,9 @@ package "HU-10: Order" {
   Customer_O --> UCO5
   Customer_O --> UCO6
 
-  UCO1 --> UCO2
-  UCO2 --> UCO3
-  UCO3 --> UCO4
-  UCO4 --> System_O
-}
-
-' =========================================================================
-' RELACIONES ENTRE PAQUETES (si las hay, se pueden añadir aquí)
-' =========================================================================
-' Ejemplo de relación entre paquetes (si fuera necesaria):
-' System_D --> System_N : "Generates Notifications"
-' UCO4 --> UCP1 : "Triggers Payment Registration"
-
+    UCO1 --> UCO2
+    UCO2 --> UCO3
+    UCO3 --> UCO4
+    UCO4 --> SystemO
+  }
 @enduml
