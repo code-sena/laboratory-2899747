@@ -129,4 +129,3 @@ CREATE TABLE return (
     FOREIGN KEY (order_id) REFERENCES order(id),
     FOREIGN KEY (product_id) REFERENCES product(id)
 );
-
