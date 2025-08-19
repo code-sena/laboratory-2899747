@@ -134,26 +134,51 @@ package "HU-3: Shipment" {
   UC1 --> UC4
 }
 
-  package "HU-16: ProductTracking" {
+   package "HU-10: Order" {
 
     'Actors'
-    actor "System" as System
-    actor "Customer" as Customer
-    actor "Admin" as Admin
+    actor "Customer" as CustomerO
+    actor "System" as SystemO
 
     'Use Cases'
-    usecase "Register ProductTracking" as UC1
-    usecase "Update Shipment Status" as UC2
-    usecase "View Tracking Info" as UC3
-    usecase "Notify Customer" as UC4
+    usecase "Register Order" as UCO1
+    usecase "Validate Order Data" as UCO2
+    usecase "Calculate Total" as UCO3
+    usecase "Register Order in Database" as UCO4
+    usecase "Cancel Order" as UCO5
+    usecase "View Orders" as UCO6
 
     'Relationships'
-    Admin --> UC1
-    Admin --> UC2
-    System --> UC4
+    CustomerO --> UCO1
+    CustomerO --> UCO5
+    CustomerO --> UCO6
 
-    Customer --> UC3
-    UC2 --> UC4
-    UC1 --> UC3
+    UCO1 --> UCO2
+    UCO2 --> UCO3
+    UCO3 --> UCO4
+    UCO4 --> SystemO
   }
+
+  package "HU-16: ProductTracking" {
+
+    'Actors'
+    actor "System" as System
+    actor "Customer" as Customer
+    actor "Admin" as Admin
+
+    'Use Cases'
+    usecase "Register ProductTracking" as UC1
+    usecase "Update Shipment Status" as UC2
+    usecase "View Tracking Info" as UC3
+    usecase "Notify Customer" as UC4
+
+    'Relationships'
+    Admin --> UC1
+    Admin --> UC2
+    System --> UC4
+
+    Customer --> UC3
+    UC2 --> UC4
+    UC1 --> UC3
+  }
 @enduml
