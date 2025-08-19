@@ -42,4 +42,19 @@ SupportTicket "1" -- "1" Customer : belongs to
     + listAllReviews(): List<Review>
     }
 
+    package "HU-8: Inventory" {
+
+  class Inventory {
+        - id : int
+        - product_id : int
+        - quantity : int
+        - last_update : datetime
+        + create()
+        + read()
+        + update()
+        + delete()
+  }
+
+}
+
 @enduml
