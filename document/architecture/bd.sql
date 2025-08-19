@@ -3,6 +3,17 @@ DROP DATABASE IF EXISTS shopping_cart;
 CREATE DATABASE shopping_cart;
 USE shopping_cart;
 
+
+-- SupportTicket table
+CREATE TABLE SupportTicket (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  customer_id INT NOT NULL,
+  subject VARCHAR(100) NOT NULL,
+  description TEXT,
+  status VARCHAR(50) NOT NULL,
+  created_at DATETIME NOT NULL,
+  FOREIGN KEY (customer_id) REFERENCES Customer(id)
+);
 CREATE TABLE Department (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL UNIQUE,
@@ -18,6 +29,13 @@ CREATE TABLE Order(
     status VARCHAR(50) NOT NULL,
     total DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (customer_id) REFERENCES Customer(id)
+)
+create table city (
+    id int primary key auto_increment,
+    name varchar(100) not null unique,
+    active boolean default true,
+    department_id int not null,
+    foreign key (department_id) references department(id)
 );
 
 -- Tables
@@ -59,4 +77,23 @@ CREATE TABLE Notification (
     FOREIGN KEY (customer_id) REFERENCES Customer(id)
 );
 
+-- entity Shipment
+CREATE TABLE Shipment (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    shipment_date DATETIME NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    tracking_number VARCHAR(100) UNIQUE,
+    FOREIGN KEY (order_id) REFERENCES Order(id)
+);
+
+CREATE TABLE customer (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(100) NOT NULL,
+    last_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    phone VARCHAR(20),
+    address VARCHAR(255),
+    active BOOLEAN DEFAULT TRUE
+);
 
