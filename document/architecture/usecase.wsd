@@ -117,4 +117,29 @@ SupportAgent --> UC4
     UC4 --> FeedbackModule
     Customer --> UC5
   }
+
+
+
+  package "HU-20: AuditLog" {
+  'Actors'
+  actor "System" as System
+  actor "User" as User
+  actor "Security Admin" as Admin
+
+  'Use Cases'
+  usecase "Register Audit Log" as UC1
+  usecase "Store Log in Database" as UC2
+  usecase "Consult Audit Logs" as UC3
+  usecase "Monitor Security Events" as UC4
+
+  'Relationships'
+  User --> UC1
+  System --> UC1
+  UC1 --> UC2
+
+  Admin --> UC3
+  UC3 --> UC4 : <<includes>>
+  UC1 .> UC4 : <<extends>>
+}
+
 @enduml
