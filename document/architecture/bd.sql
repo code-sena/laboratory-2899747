@@ -29,6 +29,13 @@ CREATE TABLE Order(
     status VARCHAR(50) NOT NULL,
     total DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (customer_id) REFERENCES Customer(id)
+)
+create table city (
+    id int primary key auto_increment,
+    name varchar(100) not null unique,
+    active boolean default true,
+    department_id int not null,
+    foreign key (department_id) references department(id)
 );
 
 -- Tables
@@ -68,6 +75,16 @@ CREATE TABLE Notification (
     `read` BOOLEAN DEFAULT FALSE,           
     FOREIGN KEY (user_id) REFERENCES User(id),
     FOREIGN KEY (customer_id) REFERENCES Customer(id)
+);
+
+-- entity Shipment
+CREATE TABLE Shipment (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    shipment_date DATETIME NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    tracking_number VARCHAR(100) UNIQUE,
+    FOREIGN KEY (order_id) REFERENCES Order(id)
 );
 
 CREATE TABLE customer (
