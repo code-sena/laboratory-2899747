@@ -11,6 +11,16 @@ CREATE TABLE Department (
     FOREIGN KEY (country_id) REFERENCES Country(id)
 );
 
+CREATE TABLE Order(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT NOT NULL,
+    order_date DATETIME NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    total DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES Customer(id)
+);
+
+
 -- Tables
 CREATE TABLE payment (
   id INT NOT NULL AUTO_INCREMENT,
