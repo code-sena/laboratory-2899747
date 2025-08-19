@@ -3,6 +3,15 @@ DROP DATABASE IF EXISTS shopping_cart;
 CREATE DATABASE shopping_cart;
 USE shopping_cart;
 
+-- entity Neighborhood
+CREATE TABLE Neighborhood (
+    id INT AUTO_INCREMET PRIMARY KEY,
+    neighborhoodName VARCHAR(100) NOT NULL UNIQUE,
+    active BOOLEAN NOT NULL DEFAULT TRUE,
+    city_id INT NOT NULL,
+    FOREIGN KEY (city_id) REFERENCES City(id)
+);
+
 -- Tables
 CREATE TABLE payment (
   id INT NOT NULL AUTO_INCREMENT,
