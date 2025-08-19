@@ -1,4 +1,6 @@
 @startuml
+top to bottom direction
+skinparam linetype ortho
 
 class SupportTicket {
   +id: int
@@ -137,6 +139,77 @@ class ProductService {
   ProductController --> ProductService
   ProductController --> ProductDTO
 
-}
+  
 
+}
+package "HU-12: Payment" {
+  interface IPayment << interface >>
+  class Order {
+    + Order(): 
+    - orderId: Long
+  }
+  class Payment {
+    + Payment(): 
+    + Payment(Integer, Order, PaymentMethod, BigDecimal, BigDecimal, StatusPaymentTypes): 
+    - order: Order
+    - paymentMethod: PaymentMethod
+    - status: StatusPaymentTypes
+    - id: Integer
+    - paymentDate: BigDecimal
+    - amount: BigDecimal
+    + getId(): Integer
+    + getOrder(): Order
+    + setPaymentDate(BigDecimal): void
+    + setStatus(StatusPaymentTypes): void
+    + getPaymentMethod(): PaymentMethod
+    # canEqual(Object): boolean
+    + toString(): String
+    + getAmount(): BigDecimal
+    + setPaymentMethod(PaymentMethod): void
+    + getPaymentDate(): BigDecimal
+    + equals(Object): boolean
+    + getStatus(): StatusPaymentTypes
+    + setId(Integer): void
+    + hashCode(): int
+    + setAmount(BigDecimal): void
+    + setOrder(Order): void
+    + builder(): PaymentBuilder
+  }
+  class PaymentBuilder {
+    ~ PaymentBuilder(): 
+    - order: Order
+    - amount: BigDecimal
+    - status: StatusPaymentTypes
+    - paymentMethod: PaymentMethod
+    - id: Integer
+    - paymentDate: BigDecimal
+    + id(Integer): PaymentBuilder
+    + order(Order): PaymentBuilder
+    + paymentMethod(PaymentMethod): PaymentBuilder
+    + amount(BigDecimal): PaymentBuilder
+    + paymentDate(BigDecimal): PaymentBuilder
+    + status(StatusPaymentTypes): PaymentBuilder
+    + build(): Payment
+    + toString(): String
+  }
+  class PaymentMethod {
+    + PaymentMethod(): 
+    - id: Long
+  }
+  enum StatusPaymentTypes << enumeration >> {
+    + StatusPaymentTypes(): 
+    + COMPLETED: 
+    + CANCELED: 
+    + PENDING: 
+    + values(): StatusPaymentTypes[]
+    + valueOf(String): StatusPaymentTypes
+  }
+
+  IPayment                 -[#595959,dashed]->  Payment                 
+  Payment                 "1" *-[#595959,plain]-> "order\n1" Order                   
+  Payment                 "1" *-[#595959,plain]-> "paymentMethod\n1" PaymentMethod           
+  Payment                 "1" *-[#595959,plain]-> "status\n1" StatusPaymentTypes      
+  PaymentBuilder           +-[#820000,plain]-  Payment                 
+
+}
 @enduml
