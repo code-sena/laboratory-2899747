@@ -88,3 +88,17 @@ CREATE TABLE Shipment (
 );
 
 
+
+--Product
+DROP TABLE IF EXISTS product;
+CREATE TABLE product (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    price DECIMAL(10, 2) NOT NULL,
+    stock INT NOT NULL,
+    active BOOLEAN DEFAULT TRUE,
+    category_id INT,
+    FOREIGN KEY (category_id) REFERENCES category(id)
+);
+USE product;
