@@ -12,109 +12,125 @@ Customer --> UC2
 SupportAgent --> UC2
 SupportAgent --> UC3
 SupportAgent --> UC4
-  left to right direction
+left to right direction
 
-  package "HU-3: Department" {
+package "HU-3: Department" {
 
-    'Actors
-    actor "Admin User" as Admin
-    actor "System" as System
+  'Actors
+  actor "Admin User" as Admin
+  actor "System" as System
 
-    'Use Cases
-    usecase "Register Department" as UC1
-    usecase "Update Department" as UC2
-    usecase "Deactivate Department" as UC3
-    usecase "View Departments" as UC4
-    usecase "Validate Uniqueness & Format" as UC5
-    usecase "Link Department to Country" as UC6
+  'Use Cases
+  usecase "Register Department" as UC1
+  usecase "Update Department" as UC2
+  usecase "Deactivate Department" as UC3
+  usecase "View Departments" as UC4
+  usecase "Validate Uniqueness & Format" as UC5
+  usecase "Link Department to Country" as UC6
 
-    'Relationships
-    Admin --> UC1
-    Admin --> UC2
-    Admin --> UC3
-    Admin --> UC4
+  'Relationships
+  Admin --> UC1
+  Admin --> UC2
+  Admin --> UC3
+  Admin --> UC4
 
-    UC1 --> UC5
-    UC1 --> UC6
+  UC1 --> UC5
+  UC1 --> UC6
 
-    UC2 --> UC5
-    UC2 --> UC6
+  UC2 --> UC5
+  UC2 --> UC6
 
-    System --> UC5
-    System --> UC6
+  System --> UC5
+  System --> UC6
+}
+
+package "HU-22: Notification" {
+
+  'Actors'
+  actor "System" as SystemN
+  actor "User" as UserN
+  actor "Customer" as CustomerN
+
+  'Use Cases'
+  usecase "Register Notification" as UCN1
+  usecase "Send/Display Notification" as UCN2
+  usecase "Mark Notification as Read" as UCN3
+  usecase "View Notifications" as UCN4
+
+  'Relationships'
+  SystemN --> UCN1
+  UCN1 --> UCN2
+  UCN2 --> UserN
+  UCN2 --> CustomerN
+
+  UserN --> UCN3
+  CustomerN --> UCN3
+
+  UserN --> UCN4
+  CustomerN --> UCN4
+
+  UCN3 .> UCN4 : <<extends>>
+}
+
+package "HU-12: Payment" {
+
+  'Actors'
+  actor "Customer" as CustomerP
+  actor "External Payment Gateway" as PaymentGatewayP
+
+  'Use Cases'
+  usecase "Register Payment" as UCP1
+  usecase "Process Payment" as UCP2
+  usecase "Update Order Status" as UCP3
+  usecase "View Payment History" as UCP4
+
+  'Relationships'
+  CustomerP --> UCP1
+  CustomerP --> UCP4
+
+  UCP1 --> UCP2
+  UCP2 --> PaymentGatewayP
+  UCP2 .> UCP4 : <<extends>>
+  UCP3 <.. UCP4 : <<includes>>
+
+  UCP2 --> UCP3
+}
+
+package "HU-23: Review" {
+
+  'Actors'
+  actor "Customer" as Customer
+  actor "Feedback Module" as FeedbackModule
+
+  'Use Cases'
+  usecase "Create Review" as UC1
+  usecase "Validate Review Fields" as UC2
+  usecase "Register Review in Database" as UC3
+  usecase "Integrate with Feedback" as UC4
+  usecase "View Product Reviews" as UC5
+
+  'Relationships'
+  Customer --> UC1
+  UC1 --> UC2
+  UC2 --> UC3
+  UC3 --> UC4
+  UC4 --> FeedbackModule
+  Customer --> UC5
+}
+
+package "HU-3: Shipment" {
+  actor User as user
+
+  rectangle "Shipment System" {
+    usecase "Manage Shipments" as UC1
+    usecase "Register Shipment" as UC2
+    usecase "View Shipment" as UC3
+    usecase "Update Shipment Status" as UC4
   }
-  
-  package "HU-22: Notification" {
 
-    'Actors'
-    actor "System" as SystemN
-    actor "User" as UserN
-    actor "Customer" as CustomerN
-
-    'Use Cases'
-    usecase "Register Notification" as UCN1
-    usecase "Send/Display Notification" as UCN2
-    usecase "Mark Notification as Read" as UCN3
-    usecase "View Notifications" as UCN4
-
-    'Relationships'
-    SystemN --> UCN1
-    UCN1 --> UCN2
-    UCN2 --> UserN
-    UCN2 --> CustomerN
-
-    UserN --> UCN3
-    CustomerN --> UCN3
-
-    UserN --> UCN4
-    CustomerN --> UCN4
-
-    UCN3 .> UCN4 : <<extends>>
-  }
-
-  package "HU-12: Payment" {
-
-    'Actors'
-    actor "Customer" as CustomerP
-    actor "External Payment Gateway" as PaymentGatewayP
-
-    'Use Cases'
-    usecase "Register Payment" as UCP1
-    usecase "Process Payment" as UCP2
-    usecase "Update Order Status" as UCP3
-    usecase "View Payment History" as UCP4
-
-    'Relationships'
-    CustomerP --> UCP1
-    CustomerP --> UCP4
-
-    UCP1 --> UCP2
-    UCP2 --> PaymentGatewayP
-    UCP2 .> UCP4 : <<extends>>
-    UCP3 <.. UCP4 : <<includes>>
-
-    UCP2 --> UCP3
-  }
-
-    package "HU-23: Review" {
-
-    'Actors'
-    actor "Customer" as Customer
-    actor "Feedback Module" as FeedbackModule
-
-    'Use Cases'
-    usecase "Create Review" as UC1
-    usecase "Validate Review Fields" as UC2
-    usecase "Register Review in Database" as UC3
-    usecase "Integrate with Feedback" as UC4
-    usecase "View Product Reviews" as UC5
-
-    'Relationships'
-    Customer --> UC1
-    UC1 --> UC2
-    UC2 --> UC3
-    UC3 --> UC4
-    UC4 --> FeedbackModule
-    Customer --> UC5
-  }
+  user --> UC1
+  UC1 --> UC2
+  UC1 --> UC3
+  UC1 --> UC4
+}
 @enduml
