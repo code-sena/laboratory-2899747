@@ -3,6 +3,17 @@ DROP DATABASE IF EXISTS shopping_cart;
 CREATE DATABASE shopping_cart;
 USE shopping_cart;
 
+
+-- SupportTicket table
+CREATE TABLE SupportTicket (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  customer_id INT NOT NULL,
+  subject VARCHAR(100) NOT NULL,
+  description TEXT,
+  status VARCHAR(50) NOT NULL,
+  created_at DATETIME NOT NULL,
+  FOREIGN KEY (customer_id) REFERENCES Customer(id)
+);
 CREATE TABLE Department (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL UNIQUE,
@@ -54,4 +65,16 @@ CREATE TABLE review (
   FOREIGN KEY (customer_id) REFERENCES customer(id),
   FOREIGN KEY (feedback_id) REFERENCES feedback(id)
 );
+
+CREATE TABLE Notification (
+    id INT AUTO_INCREMENT PRIMARY KEY,      
+    user_id INT NULL,                      
+    customer_id INT NULL,                   
+    message VARCHAR(255) NOT NULL,          
+    sent_at DATETIME NOT NULL,              
+    `read` BOOLEAN DEFAULT FALSE,           
+    FOREIGN KEY (user_id) REFERENCES User(id),
+    FOREIGN KEY (customer_id) REFERENCES Customer(id)
+);
+
 
