@@ -52,4 +52,27 @@
 
     UC2 --> UC3
   }
+
+  package "HU-8: Inventory" {
+
+    'Actors
+    actor "Admin" as Admin
+    actor "System" as Sys
+
+    'Use Cases
+    usecase "Register Inventory" as UC1
+    usecase "Read Inventory" as UC2
+    usecase "Update Inventory" as UC3
+    usecase "Delete Inventory" as UC4
+
+    'Relations
+    Admin --> UC1
+    Admin --> UC2
+    Admin --> UC3
+    Admin --> UC4
+
+    Sys --> UC2
+    Sys --> UC3
+  }
+
 @enduml
