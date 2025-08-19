@@ -130,17 +130,93 @@ package "HU-3: Shipment" {
     usecase "Update Shipment Status" as UC4_S
   }
 
+<<<<<<< HEAD
 =======
+=======
+  package "HU-12: Payment" {
+
+    'Actors'
+    actor "Customer" as CustomerP
+    actor "External Payment Gateway" as PaymentGatewayP
+
+    'Use Cases'
+    usecase "Register Payment" as UCP1
+    usecase "Process Payment" as UCP2
+    usecase "Update Order Status" as UCP3
+    usecase "View Payment History" as UCP4
+
+    'Relationships'
+    CustomerP --> UCP1
+    CustomerP --> UCP4
+
+    UCP1 --> UCP2
+    UCP2 --> PaymentGatewayP
+    UCP2 .> UCP4 : <<extends>>
+    UCP3 <.. UCP4 : <<includes>>
+
+    UCP2 --> UCP3
+  }
+
+    package "HU-23: Review" {
+
+    'Actors'
+    actor "Customer" as Customer
+    actor "Feedback Module" as FeedbackModule
+
+    'Use Cases'
+    usecase "Create Review" as UC1
+    usecase "Validate Review Fields" as UC2
+    usecase "Register Review in Database" as UC3
+    usecase "Integrate with Feedback" as UC4
+    usecase "View Product Reviews" as UC5
+
+    'Relationships'
+    Customer --> UC1
+    UC1 --> UC2
+    UC2 --> UC3
+    UC3 --> UC4
+    UC4 --> FeedbackModule
+    Customer --> UC5
+  }
+
+
+
+  package "HU-20: AuditLog" {
+  'Actors'
+  actor "System" as System
+  actor "User" as User
+  actor "Security Admin" as Admin
+
+  'Use Cases'
+  usecase "Register Audit Log" as UC1
+  usecase "Store Log in Database" as UC2
+  usecase "Consult Audit Logs" as UC3
+  usecase "Monitor Security Events" as UC4
+
+  'Relationships'
+  User --> UC1
+  System --> UC1
+  UC1 --> UC2
+
+  Admin --> UC3
+  UC3 --> UC4 : <<includes>>
+  UC1 .> UC4 : <<extends>>
+}
+
+>>>>>>> 5829df64708947da1085e3b321cd3d879b249733
   user --> UC1
   UC1 --> UC2
   UC1 --> UC3
   UC1 --> UC4
+<<<<<<< HEAD
 =======
   User_S --> UC1_S
   UC1_S --> UC2_S
   UC1_S --> UC3_S
   UC1_S --> UC4_S
 
+=======
+>>>>>>> 5829df64708947da1085e3b321cd3d879b249733
 }
 
 ' =========================================================================
@@ -191,5 +267,31 @@ package "HU-10: Order" {
     UCO4 --> SystemO
   }
 
+<<<<<<< HEAD
 @enduml
 >>>>>>> c66fc65062a466aedc0d5f6f86886d991798a693
+=======
+  package "HU-16: ProductTracking" {
+
+    'Actors'
+    actor "System" as System
+    actor "Customer" as Customer
+    actor "Admin" as Admin
+
+    'Use Cases'
+    usecase "Register ProductTracking" as UC1
+    usecase "Update Shipment Status" as UC2
+    usecase "View Tracking Info" as UC3
+    usecase "Notify Customer" as UC4
+
+    'Relationships'
+    Admin --> UC1
+    Admin --> UC2
+    System --> UC4
+
+    Customer --> UC3
+    UC2 --> UC4
+    UC1 --> UC3
+  }
+@enduml
+>>>>>>> 5829df64708947da1085e3b321cd3d879b249733
