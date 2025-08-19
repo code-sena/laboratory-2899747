@@ -234,6 +234,26 @@ package "HU-10: Order" {
     UCO4 --> SystemO
   }
 
+package "HU-6: Product" {
+
+    'Actors'
+    actor "User" as AdminUser
+
+    'Use Cases'
+    usecase "List product" as UCPr1
+    usecase "Edit product" as UCPr2
+    usecase "Delete product" as UCPr3
+    usecase "Create product" as UCPr4
+
+    'Relationships'
+    AdminUser --> UCPr1
+    AdminUser --> UCPr2
+    AdminUser --> UCPr3
+    AdminUser --> UCPr4
+}
+
+
+
   package "HU-16: ProductTracking" {
 
     'Actors'
