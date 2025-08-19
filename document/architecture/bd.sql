@@ -11,6 +11,15 @@ CREATE TABLE Department (
     FOREIGN KEY (country_id) REFERENCES Country(id)
 );
 
+create table city (
+    id int primary key auto_increment,
+    name varchar(100) not null unique,
+    active boolean default true,
+    department_id int not null,
+    foreign key (department_id) references department(id)
+);
+
+
 -- Tables
 CREATE TABLE payment (
   id INT NOT NULL AUTO_INCREMENT,
