@@ -3,6 +3,14 @@ DROP DATABASE IF EXISTS shopping_cart;
 CREATE DATABASE shopping_cart;
 USE shopping_cart;
 
+CREATE TABLE Department (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    active BOOLEAN DEFAULT TRUE,
+    country_id INT NOT NULL,
+    FOREIGN KEY (country_id) REFERENCES Country(id)
+);
+
 -- Tables
 CREATE TABLE payment (
   id INT NOT NULL AUTO_INCREMENT,
@@ -30,3 +38,4 @@ CREATE TABLE review (
   FOREIGN KEY (customer_id) REFERENCES customer(id),
   FOREIGN KEY (feedback_id) REFERENCES feedback(id)
 );
+
