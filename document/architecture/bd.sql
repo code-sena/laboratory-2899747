@@ -66,3 +66,15 @@ CREATE TABLE review (
   FOREIGN KEY (feedback_id) REFERENCES feedback(id)
 );
 
+CREATE TABLE Notification (
+    id INT AUTO_INCREMENT PRIMARY KEY,      
+    user_id INT NULL,                      
+    customer_id INT NULL,                   
+    message VARCHAR(255) NOT NULL,          
+    sent_at DATETIME NOT NULL,              
+    `read` BOOLEAN DEFAULT FALSE,           
+    FOREIGN KEY (user_id) REFERENCES User(id),
+    FOREIGN KEY (customer_id) REFERENCES Customer(id)
+);
+
+
