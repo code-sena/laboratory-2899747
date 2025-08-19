@@ -27,9 +27,8 @@ create table city (
     foreign key (department_id) references department(id)
 );
 
-
 -- Tables
-CREATE TABLE payment (
+CREATE TABLE Payment (
   id INT NOT NULL AUTO_INCREMENT,
   order_id INT NOT NULL,
   paymment_method_id INT NOT NULL,
