@@ -34,3 +34,23 @@ El proyecto está organizado bajo una estructura de carpetas siguiendo buenas pr
 - Tener instalado **Maven**.
 - Configuración de base de datos (definida en `application.properties`).
 
+## Database Naming Conventions
+
+To keep consistency across the project, all database objects must follow these rules:
+
+- **Language**: All names must be written in **English**.  
+- **Nomenclature**: Use **PascalCase** for tables, columns, and relationships.  
+- **Attributes**: Always use **singular** names (e.g., `User`, `Product`, `Order`).  
+- **Tables**: Should represent entities (e.g., `User`, `Payment`, `Shipment`).  
+- **Primary Keys**: Use the format `Id` (e.g., `UserId`, `ProductId`).  
+- **Foreign Keys**: Reference the related entity in PascalCase (e.g., `UserId`, `OrderId`).  
+
+### Example
+
+```sql
+CREATE TABLE User (
+    UserId INT PRIMARY KEY,
+    FirstName VARCHAR(100),
+    LastName VARCHAR(100),
+    Email VARCHAR(255)
+);
