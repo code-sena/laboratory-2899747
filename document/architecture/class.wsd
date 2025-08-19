@@ -21,103 +21,103 @@ class Customer {
 }
 
 SupportTicket "1" -- "1" Customer : belongs to
-    class Review {
-    - id: int
-    - productId: int
-    - customerId: int
-    - rating: int
-    - comment: string
-    - createdAt: datetime
-    - feedbackId: int
+class Review {
+  - id: int
+  - productId: int
+  - customerId: int
+  - rating: int
+  - comment: string
+  - createdAt: datetime
+  - feedbackId: int
 
-    + createReview(productId: int, customerId: int, rating: int, comment: string): bool
-    + validateFields(): bool
-    + registerInDatabase(): bool
-    + integrateWithFeedback(feedbackId: int): bool
+  + createReview(productId: int, customerId: int, rating: int, comment: string): bool
+  + validateFields(): bool
+  + registerInDatabase(): bool
+  + integrateWithFeedback(feedbackId: int): bool
 
-    + getReviewById(id: int): Review
-    + getReviewsByProduct(productId: int): List<Review>
-    + updateReview(id: int, rating: int, comment: string): bool
-    + deleteReview(id: int): bool
-    + listAllReviews(): List<Review>
-    }
-
- package "HU-6: Product" {
-    class Product {
-  - id : Integer
-  - name : String
-  - description : String
-  - price : double
-  - stock : int
-  - active : boolean
-  - categoryId : int
-  
-  + Product()
-  + Product(id:Integer, name:String, description:String, price:double, stock:int, active:boolean, categoryId:int)
-  + getId() : Integer
-  + setId(id:Integer) : void
-  + getName() : String
-  + setName(name:String) : void
-  + getDescription() : String
-  + setDescription(description:String) : void
-  + getPrice() : double
-  + setPrice(price:double) : void
-  + getStock() : int
-  + setStock(stock:int) : void
-  + isActive() : boolean
-  + setActive(active:boolean) : void
-  + getCategoryId() : int
-  + setCategoryId(categoryId:int) : void
+  + getReviewById(id: int): Review
+  + getReviewsByProduct(productId: int): List<Review>
+  + updateReview(id: int, rating: int, comment: string): bool
+  + deleteReview(id: int): bool
+  + listAllReviews(): List<Review>
 }
 
-interface IProduct {
-}
+package "HU-6: Product" {
+  class Product {
+    - id : Integer
+    - name : String
+    - description : String
+    - price : double
+    - stock : int
+    - active : boolean
+    - categoryId : int
 
-interface JpaRepository<Product, Integer> {
-  + save(entity:Product) : Product
-  + findById(id:Integer) : Optional<Product>
-  + findAll() : List<Product>
-  + deleteById(id:Integer) : void
-}
-class ProductDTO {
+    + Product()
+    + Product(id:Integer, name:String, description:String, price:double, stock:int, active:boolean, categoryId:int)
+    + getId() : Integer
+    + setId(id:Integer) : void
+    + getName() : String
+    + setName(name:String) : void
+    + getDescription() : String
+    + setDescription(description:String) : void
+    + getPrice() : double
+    + setPrice(price:double) : void
+    + getStock() : int
+    + setStock(stock:int) : void
+    + isActive() : boolean
+    + setActive(active:boolean) : void
+    + getCategoryId() : int
+    + setCategoryId(categoryId:int) : void
+  }
 
-  - id : Integer
-  - name : String
-  - description : String
-  - price : double
-  - stock : int
-  - active : boolean
-  - categoryId : int
+  interface IProduct {
+  }
 
-  + Product()
-  + Product(id:Integer, name:String, description:String, price:double, stock:int, active:boolean, categoryId:int)
-  + getId() : Integer
-  + setId(id:Integer) : void
-  + getName() : String
-  + setName(name:String) : void
-  + getDescription() : String
-  + setDescription(description:String) : void
-  + getPrice() : double
-  + setPrice(price:double) : void
-  + getStock() : int
-  + setStock(stock:int) : void
-  + isActive() : boolean
-  + setActive(active:boolean) : void
-  + getCategoryId() : int
-  + setCategoryId(categoryId:int) : void
-  
-}
+  interface JpaRepository<Product, Integer> {
+    + save(entity:Product) : Product
+    + findById(id:Integer) : Optional<Product>
+    + findAll() : List<Product>
+    + deleteById(id:Integer) : void
+  }
+  class ProductDTO {
 
-class ProductService {
-  - IProduct : repository
+    - id : Integer
+    - name : String
+    - description : String
+    - price : double
+    - stock : int
+    - active : boolean
+    - categoryId : int
 
-  + createProduct(product:Product) : Product
-  + getProductById(id:Integer) : Product
-  + getAllProducts() : List<Product>
-  + updateProduct(product:Product) : Product
-  + deleteProduct(id:Integer) : void
+    + Product()
+    + Product(id:Integer, name:String, description:String, price:double, stock:int, active:boolean, categoryId:int)
+    + getId() : Integer
+    + setId(id:Integer) : void
+    + getName() : String
+    + setName(name:String) : void
+    + getDescription() : String
+    + setDescription(description:String) : void
+    + getPrice() : double
+    + setPrice(price:double) : void
+    + getStock() : int
+    + setStock(stock:int) : void
+    + isActive() : boolean
+    + setActive(active:boolean) : void
+    + getCategoryId() : int
+    + setCategoryId(categoryId:int) : void
 
-}
+  }
+
+  class ProductService {
+    - IProduct : repository
+
+    + createProduct(product:Product) : Product
+    + getProductById(id:Integer) : Product
+    + getAllProducts() : List<Product>
+    + updateProduct(product:Product) : Product
+    + deleteProduct(id:Integer) : void
+
+  }
 
   class ProductController {
     - service : ProductService
@@ -138,5 +138,22 @@ class ProductService {
   ProductController --> ProductDTO
 
 }
+
+class Return {
+  +id: int
+  +order_id: int
+  +product_id: int
+  +return_date: datetime
+  +reason: string
+  +status: string
+}
+
+class Order {
+  +id: int
+  // otros atributos...
+}
+
+Return --> Order : order_id
+Return --> Product
 
 @enduml
