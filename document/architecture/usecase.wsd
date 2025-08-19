@@ -1,4 +1,7 @@
 @startuml
+
+package "HU-21 User"{
+    
 left to right direction
 actor "Administrator" as Admin
 actor "User" as User
@@ -16,4 +19,5 @@ Admin --> UC2
 User --> UC3
 UC3 --> UC4
 UC3 --> UC5
+}
 @enduml
