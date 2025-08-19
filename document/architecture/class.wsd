@@ -1,3 +1,25 @@
 @startuml
 
+class SupportTicket {
+  +id: int
+  +customer_id: int
+  +subject: string
+  +description: string
+  +status: string
+  +created_at: datetime
+
+  +create()
+  +read()
+  +update()
+  +delete()
+}
+
+class Customer {
+  +id: int
+  +name: string
+  +email: string
+}
+
+SupportTicket "1" -- "1" Customer : belongs to
+
 @enduml

@@ -1,3 +1,14 @@
 @startuml
+actor Customer
+actor SupportAgent
 
-@enduml
+usecase "Register Support Ticket" as UC1
+usecase "View Support Ticket" as UC2
+usecase "Update Support Ticket" as UC3
+usecase "Close Support Ticket" as UC4
+
+Customer --> UC1
+Customer --> UC2
+SupportAgent --> UC2
+SupportAgent --> UC3
+SupportAgent --> UC4
