@@ -18,6 +18,13 @@ CREATE TABLE Order(
     status VARCHAR(50) NOT NULL,
     total DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (customer_id) REFERENCES Customer(id)
+)
+create table city (
+    id int primary key auto_increment,
+    name varchar(100) not null unique,
+    active boolean default true,
+    department_id int not null,
+    foreign key (department_id) references department(id)
 );
 
 
