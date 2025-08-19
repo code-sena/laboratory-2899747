@@ -1,3 +1,20 @@
 @startuml
+left to right direction
+actor "Administrador" as Admin
+actor "Usuario" as User
+
+rectangle "Gestión de Usuarios" {
+    usecase "Registrar Usuario" as UC1
+    usecase "Gestionar Usuarios" as UC2
+    usecase "Autenticar Usuario" as UC3
+    usecase "Autorizar Acceso" as UC4
+    usecase "Auditar Actividad" as UC5
+}
+
+Admin --> UC1
+Admin --> UC2
+User --> UC3
+UC3 --> UC4
+UC3 --> UC5
 
 @enduml
