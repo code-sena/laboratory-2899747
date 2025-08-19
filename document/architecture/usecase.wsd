@@ -1,3 +1,27 @@
 @startuml
+  left to right direction
 
+  package "HU-12: Payment" {
+
+    'Actors'
+    actor "Customer" as Customer
+    actor "External Payment Gateway" as PaymentGateway
+
+    'Use Cases'
+    usecase "Register Payment" as UC1
+    usecase "Process Payment" as UC2
+    usecase "Update Order Status" as UC3
+    usecase "View Payment History" as UC4
+
+    'Relationships'
+    Customer --> UC1
+    Customer --> UC4
+
+    UC1 --> UC2
+    UC2 --> PaymentGateway
+    UC2 .> UC4 : <<extends>>
+    UC3 <.. UC4 : <<includes>>
+
+    UC2 --> UC3
+  }
 @enduml
