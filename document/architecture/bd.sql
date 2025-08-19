@@ -70,4 +70,14 @@ CREATE TABLE Notification (
     FOREIGN KEY (customer_id) REFERENCES Customer(id)
 );
 
+-- entity Shipment
+CREATE TABLE Shipment (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    shipment_date DATETIME NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    tracking_number VARCHAR(100) UNIQUE,
+    FOREIGN KEY (order_id) REFERENCES Order(id)
+);
+
 
