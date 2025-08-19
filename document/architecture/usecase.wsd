@@ -24,4 +24,26 @@
 
     UC2 --> UC3
   }
+
+    package "HU-23: Review" {
+
+    'Actors'
+    actor "Customer" as Customer
+    actor "Feedback Module" as FeedbackModule
+
+    'Use Cases'
+    usecase "Create Review" as UC1
+    usecase "Validate Review Fields" as UC2
+    usecase "Register Review in Database" as UC3
+    usecase "Integrate with Feedback" as UC4
+    usecase "View Product Reviews" as UC5
+
+    'Relationships'
+    Customer --> UC1
+    UC1 --> UC2
+    UC2 --> UC3
+    UC3 --> UC4
+    UC4 --> FeedbackModule
+    Customer --> UC5
+  }
 @enduml
