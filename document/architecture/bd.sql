@@ -24,3 +24,9 @@ CREATE TABLE payment (
   FOREIGN KEY (payment_method_id) REFERENCES payment_method(id)
 );
 
+
+CREATE TABLE category (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    active BOOLEAN NOT NULL DEFAULT TRUE
+);

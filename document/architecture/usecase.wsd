@@ -52,4 +52,20 @@
 
     UC2 --> UC3
   }
+
+  package "HU-7: Category"{
+    actor User as U
+
+    rectangle "Inventory System" {
+      usecase "Register Category" as UC1
+      usecase "Validate Name" as UC2
+      usecase "Save Category in DB" as UC3
+      usecase "Make Category Available\nfor Products" as UC4
+    }
+
+    U --> UC1
+    UC1 --> UC2
+    UC2 --> UC3
+    UC3 --> UC4
+  }
 @enduml
