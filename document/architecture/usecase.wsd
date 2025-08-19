@@ -1,131 +1,133 @@
 @startuml
-actor Customer
-actor SupportAgent
-
-usecase "Register Support Ticket" as UC1
-usecase "View Support Ticket" as UC2
-usecase "Update Support Ticket" as UC3
-usecase "Close Support Ticket" as UC4
-
-Customer --> UC1
-Customer --> UC2
-SupportAgent --> UC2
-SupportAgent --> UC3
-SupportAgent --> UC4
 left to right direction
 
+' =========================================================================
+' PAQUETE: HU-3: Department (Departamento)
+' =========================================================================
 package "HU-3: Department" {
 
-  'Actors
-  actor "Admin User" as Admin
-  actor "System" as System
+  ' Actores
+  actor "Admin User" as Admin_D
+  actor "System" as System_D
 
-  'Use Cases
-  usecase "Register Department" as UC1
-  usecase "Update Department" as UC2
-  usecase "Deactivate Department" as UC3
-  usecase "View Departments" as UC4
-  usecase "Validate Uniqueness & Format" as UC5
-  usecase "Link Department to Country" as UC6
+  ' Casos de Uso
+  usecase "Register Department" as UC1_D
+  usecase "Update Department" as UC2_D
+  usecase "Deactivate Department" as UC3_D
+  usecase "View Departments" as UC4_D
+  usecase "Validate Uniqueness & Format" as UC5_D
+  usecase "Link Department to Country" as UC6_D
 
-  'Relationships
-  Admin --> UC1
-  Admin --> UC2
-  Admin --> UC3
-  Admin --> UC4
+  ' Relaciones
+  Admin_D --> UC1_D
+  Admin_D --> UC2_D
+  Admin_D --> UC3_D
+  Admin_D --> UC4_D
 
-  UC1 --> UC5
-  UC1 --> UC6
+  UC1_D --> UC5_D
+  UC1_D --> UC6_D
 
-  UC2 --> UC5
-  UC2 --> UC6
+  UC2_D --> UC5_D
+  UC2_D --> UC6_D
 
-  System --> UC5
-  System --> UC6
+  System_D --> UC5_D
+  System_D --> UC6_D
 }
 
+' =========================================================================
+' PAQUETE: HU-22: Notification (Notificación) - MERGED
+' =========================================================================
 package "HU-22: Notification" {
 
-  'Actors'
-  actor "System" as SystemN
-  actor "User" as UserN
-  actor "Customer" as CustomerN
+  ' Actores
+  actor "System" as System_N
+  actor "User" as User_N
+  actor "Customer" as Customer_N
 
-  'Use Cases'
+  ' Casos de Uso
   usecase "Register Notification" as UCN1
   usecase "Send/Display Notification" as UCN2
   usecase "Mark Notification as Read" as UCN3
   usecase "View Notifications" as UCN4
 
-  'Relationships'
-  SystemN --> UCN1
+  ' Relaciones
+  System_N --> UCN1
   UCN1 --> UCN2
-  UCN2 --> UserN
-  UCN2 --> CustomerN
+  UCN2 --> User_N
+  UCN2 --> Customer_N
 
-  UserN --> UCN3
-  CustomerN --> UCN3
+  User_N --> UCN3
+  Customer_N --> UCN3
 
-  UserN --> UCN4
-  CustomerN --> UCN4
+  User_N --> UCN4
+  Customer_N --> UCN4
 
   UCN3 .> UCN4 : <<extends>>
 }
 
+' =========================================================================
+' PAQUETE: HU-12: Payment (Pago)
+' =========================================================================
 package "HU-12: Payment" {
 
-  'Actors'
-  actor "Customer" as CustomerP
-  actor "External Payment Gateway" as PaymentGatewayP
+  ' Actores
+  actor "Customer" as Customer_P
+  actor "External Payment Gateway" as PaymentGateway_P
 
-  'Use Cases'
+  ' Casos de Uso
   usecase "Register Payment" as UCP1
   usecase "Process Payment" as UCP2
   usecase "Update Order Status" as UCP3
   usecase "View Payment History" as UCP4
 
-  'Relationships'
-  CustomerP --> UCP1
-  CustomerP --> UCP4
+  ' Relaciones
+  Customer_P --> UCP1
+  Customer_P --> UCP4
 
   UCP1 --> UCP2
-  UCP2 --> PaymentGatewayP
+  UCP2 --> PaymentGateway_P
   UCP2 .> UCP4 : <<extends>>
   UCP3 <.. UCP4 : <<includes>>
 
   UCP2 --> UCP3
 }
 
+' =========================================================================
+' PAQUETE: HU-23: Review (Revisión)
+' =========================================================================
 package "HU-23: Review" {
 
-  'Actors'
-  actor "Customer" as Customer
-  actor "Feedback Module" as FeedbackModule
+  ' Actores
+  actor "Customer" as Customer_R
+  actor "Feedback Module" as FeedbackModule_R
 
-  'Use Cases'
-  usecase "Create Review" as UC1
-  usecase "Validate Review Fields" as UC2
-  usecase "Register Review in Database" as UC3
-  usecase "Integrate with Feedback" as UC4
-  usecase "View Product Reviews" as UC5
+  ' Casos de Uso
+  usecase "Create Review" as UC1_R
+  usecase "Validate Review Fields" as UC2_R
+  usecase "Register Review in Database" as UC3_R
+  usecase "Integrate with Feedback" as UC4_R
+  usecase "View Product Reviews" as UC5_R
 
-  'Relationships'
-  Customer --> UC1
-  UC1 --> UC2
-  UC2 --> UC3
-  UC3 --> UC4
-  UC4 --> FeedbackModule
-  Customer --> UC5
+  ' Relaciones
+  Customer_R --> UC1_R
+  UC1_R --> UC2_R
+  UC2_R --> UC3_R
+  UC3_R --> UC4_R
+  UC4_R --> FeedbackModule_R
+  Customer_R --> UC5_R
 }
 
+' =========================================================================
+' PAQUETE: HU-3: Shipment (Envío)
+' =========================================================================
 package "HU-3: Shipment" {
-  actor User as user
+  actor "User" as User_S
 
   rectangle "Shipment System" {
-    usecase "Manage Shipments" as UC1
-    usecase "Register Shipment" as UC2
-    usecase "View Shipment" as UC3
-    usecase "Update Shipment Status" as UC4
+    usecase "Manage Shipments" as UC1_S
+    usecase "Register Shipment" as UC2_S
+    usecase "View Shipment" as UC3_S
+    usecase "Update Shipment Status" as UC4_S
   }
 
   package "HU-12: Payment" {
@@ -204,28 +206,49 @@ package "HU-3: Shipment" {
   UC1 --> UC4
 }
 
-   package "HU-10: Order" {
+' =========================================================================
+' PAQUETE: HU-10: Order (Pedido)
+' =========================================================================
+package "HU-10: Order" {
 
-    'Actors'
-    actor "Customer" as CustomerO
-    actor "System" as SystemO
+  ' Actores
+  actor "Customer" as Customer_O
+  actor "System" as System_O
 
-    'Use Cases'
-    usecase "Register Order" as UCO1
-    usecase "Validate Order Data" as UCO2
-    usecase "Calculate Total" as UCO3
-    usecase "Register Order in Database" as UCO4
-    usecase "Cancel Order" as UCO5
-    usecase "View Orders" as UCO6
+  ' Casos de Uso
+  usecase "Register Order" as UCO1
+  usecase "Validate Order Data" as UCO2
+  usecase "Calculate Total" as UCO3
+  usecase "Register Order in Database" as UCO4
+  usecase "Cancel Order" as UCO5
+  usecase "View Orders" as UCO6
 
-    'Relationships'
-    CustomerO --> UCO1
-    CustomerO --> UCO5
-    CustomerO --> UCO6
+  ' Relaciones
+  Customer_O --> UCO1
+  Customer_O --> UCO5
+  Customer_O --> UCO6
 
-    UCO1 --> UCO2
-    UCO2 --> UCO3
-    UCO3 --> UCO4
-    UCO4 --> SystemO
-  }
+  UCO1 --> UCO2
+  UCO2 --> UCO3
+  UCO3 --> UCO4
+  UCO4 --> SystemO
+}
+
+package "HU-18: Return" {
+  actor "Customer" as CustomerR
+  actor "SupportAgent" as SupportAgentR
+
+  usecase "Request Return" as UCR1
+  usecase "View Return Status" as UCR2
+  usecase "Process Return" as UCR3
+  usecase "Update Return Status" as UCR4
+
+  CustomerR --> UCR1
+  CustomerR --> UCR2
+  SupportAgentR --> UCR3
+  SupportAgentR --> UCR4
+  UCR1 --> UCR3
+  UCR3 --> UCR4
+}
+
 @enduml
