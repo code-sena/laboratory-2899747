@@ -21,27 +21,41 @@ class Customer {
 }
 
 SupportTicket "1" -- "1" Customer : belongs to
-class Review {
-  - id: int
-  - productId: int
-  - customerId: int
-  - rating: int
-  - comment: string
-  - createdAt: datetime
-  - feedbackId: int
+    class Review {
+    - id: int
+    - productId: int
+    - customerId: int
+    - rating: int
+    - comment: string
+    - createdAt: datetime
+    - feedbackId: int
 
-  + createReview(productId: int, customerId: int, rating: int, comment: string): bool
-  + validateFields(): bool
-  + registerInDatabase(): bool
-  + integrateWithFeedback(feedbackId: int): bool
+    + createReview(productId: int, customerId: int, rating: int, comment: string): bool
+    + validateFields(): bool
+    + registerInDatabase(): bool
+    + integrateWithFeedback(feedbackId: int): bool
 
-  + getReviewById(id: int): Review
-  + getReviewsByProduct(productId: int): List<Review>
-  + updateReview(id: int, rating: int, comment: string): bool
-  + deleteReview(id: int): bool
-  + listAllReviews(): List<Review>
+    + getReviewById(id: int): Review
+    + getReviewsByProduct(productId: int): List<Review>
+    + updateReview(id: int, rating: int, comment: string): bool
+    + deleteReview(id: int): bool
+    + listAllReviews(): List<Review>
+    }
+
+    package "HU-8: Inventory" {
+
+  class Inventory {
+        - id : int
+        - product_id : int
+        - quantity : int
+        - last_update : datetime
+        + create()
+        + read()
+        + update()
+        + delete()
+  }
+
 }
-
 package "HU-6: Product" {
   class Product {
     - id : Integer
@@ -155,5 +169,4 @@ class Order {
 
 Return --> Order : order_id
 Return --> Product
-
 @enduml
