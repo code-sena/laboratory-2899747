@@ -1,55 +1,85 @@
 @startuml
   left to right direction
 
+  package "HU-3: Department" {
+
+    'Actors
+    actor "Admin User" as Admin
+    actor "System" as System
+
+    'Use Cases
+    usecase "Register Department" as UC1
+    usecase "Update Department" as UC2
+    usecase "Deactivate Department" as UC3
+    usecase "View Departments" as UC4
+    usecase "Validate Uniqueness & Format" as UC5
+    usecase "Link Department to Country" as UC6
+
+    'Relationships
+    Admin --> UC1
+    Admin --> UC2
+    Admin --> UC3
+    Admin --> UC4
+
+    UC1 --> UC5
+    UC1 --> UC6
+
+    UC2 --> UC5
+    UC2 --> UC6
+
+    System --> UC5
+    System --> UC6
+  }
+  
   package "HU-22: Notification" {
 
     'Actors'
-    actor "System" as System
-    actor "User" as User
-    actor "Customer" as Customer
+    actor "System" as SystemN
+    actor "User" as UserN
+    actor "Customer" as CustomerN
 
     'Use Cases'
-    usecase "Register Notification" as UC1
-    usecase "Send/Display Notification" as UC2
-    usecase "Mark Notification as Read" as UC3
-    usecase "View Notifications" as UC4
+    usecase "Register Notification" as UCN1
+    usecase "Send/Display Notification" as UCN2
+    usecase "Mark Notification as Read" as UCN3
+    usecase "View Notifications" as UCN4
 
     'Relationships'
-    System --> UC1
-    UC1 --> UC2
-    UC2 --> User
-    UC2 --> Customer
+    SystemN --> UCN1
+    UCN1 --> UCN2
+    UCN2 --> UserN
+    UCN2 --> CustomerN
 
-    User --> UC3
-    Customer --> UC3
+    UserN --> UCN3
+    CustomerN --> UCN3
 
-    User --> UC4
-    Customer --> UC4
+    UserN --> UCN4
+    CustomerN --> UCN4
 
-    UC3 .> UC4 : <<extends>>
+    UCN3 .> UCN4 : <<extends>>
   }
 
   package "HU-12: Payment" {
 
     'Actors'
-    actor "Customer" as Customer
-    actor "External Payment Gateway" as PaymentGateway
+    actor "Customer" as CustomerP
+    actor "External Payment Gateway" as PaymentGatewayP
 
     'Use Cases'
-    usecase "Register Payment" as UC1
-    usecase "Process Payment" as UC2
-    usecase "Update Order Status" as UC3
-    usecase "View Payment History" as UC4
+    usecase "Register Payment" as UCP1
+    usecase "Process Payment" as UCP2
+    usecase "Update Order Status" as UCP3
+    usecase "View Payment History" as UCP4
 
     'Relationships'
-    Customer --> UC1
-    Customer --> UC4
+    CustomerP --> UCP1
+    CustomerP --> UCP4
 
-    UC1 --> UC2
-    UC2 --> PaymentGateway
-    UC2 .> UC4 : <<extends>>
-    UC3 <.. UC4 : <<includes>>
+    UCP1 --> UCP2
+    UCP2 --> PaymentGatewayP
+    UCP2 .> UCP4 : <<extends>>
+    UCP3 <.. UCP4 : <<includes>>
 
-    UC2 --> UC3
+    UCP2 --> UCP3
   }
 @enduml
