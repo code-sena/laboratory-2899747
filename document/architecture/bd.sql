@@ -111,3 +111,15 @@ CREATE TABLE product (
     FOREIGN KEY (category_id) REFERENCES category(id)
 );
 USE product;
+
+--return
+CREATE TABLE return (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    product_id INT NOT NULL,
+    return_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    reason VARCHAR(255),
+    status VARCHAR(50) NOT NULL DEFAULT 'Pending',
+    FOREIGN KEY (order_id) REFERENCES order(id),
+    FOREIGN KEY (product_id) REFERENCES product(id)
+);
