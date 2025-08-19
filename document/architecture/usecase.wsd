@@ -158,4 +158,27 @@ package "HU-3: Shipment" {
     UCO3 --> UCO4
     UCO4 --> SystemO
   }
+
+  package "HU-16: ProductTracking" {
+
+    'Actors'
+    actor "System" as System
+    actor "Customer" as Customer
+    actor "Admin" as Admin
+
+    'Use Cases'
+    usecase "Register ProductTracking" as UC1
+    usecase "Update Shipment Status" as UC2
+    usecase "View Tracking Info" as UC3
+    usecase "Notify Customer" as UC4
+
+    'Relationships'
+    Admin --> UC1
+    Admin --> UC2
+    System --> UC4
+
+    Customer --> UC3
+    UC2 --> UC4
+    UC1 --> UC3
+  }
 @enduml

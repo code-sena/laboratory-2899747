@@ -97,3 +97,39 @@ CREATE TABLE customer (
     active BOOLEAN DEFAULT TRUE
 );
 
+
+--Product
+DROP TABLE IF EXISTS product;
+CREATE TABLE product (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    price DECIMAL(10, 2) NOT NULL,
+    stock INT NOT NULL,
+    active BOOLEAN DEFAULT TRUE,
+    category_id INT,
+    FOREIGN KEY (category_id) REFERENCES category(id)
+);
+USE product;
+
+--return
+CREATE TABLE return (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT NOT NULL,
+    product_id INT NOT NULL,
+    return_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    reason VARCHAR(255),
+    status VARCHAR(50) NOT NULL DEFAULT 'Pending',
+    FOREIGN KEY (order_id) REFERENCES order(id),
+    FOREIGN KEY (product_id) REFERENCES product(id)
+);
+
+CREATE TABLE ProductTracking (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  shipment_id INT NOT NULL,
+  shipment_status_id INT NOT NULL,
+  location VARCHAR(255),
+  update_time DATETIME,
+  FOREIGN KEY (shipment_id) REFERENCES Shipment(id),
+  FOREIGN KEY (shipment_status_id) REFERENCES ShipmentStatus(id)
+);
