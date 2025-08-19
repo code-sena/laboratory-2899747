@@ -276,4 +276,27 @@ package "HU-6: Product" {
     UC2 --> UC4
     UC1 --> UC3
   }
+
+package "HU-17: OrderDetail" {
+ left to right direction
+skinparam packageStyle rectangle
+
+actor "Administrator\n(System User)" as Admin
+actor "External System\n(POS / API)" as External
+
+package "Order Management System" {
+  usecase "Register OrderDetail" as UC_Register
+  usecase "Validate Order and Product" as UC_Validate
+  usecase "Check Inventory" as UC_CheckStock
+  usecase "Update Inventory" as UC_UpdateStock
+}
+
+Admin --> UC_Register
+External --> UC_Register
+
+UC_Register .> UC_Validate : <<include>>
+UC_Register .> UC_CheckStock : <<include>>
+UC_Register .> UC_UpdateStock : <<include>>
+
+}
 @enduml
