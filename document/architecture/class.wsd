@@ -42,4 +42,101 @@ SupportTicket "1" -- "1" Customer : belongs to
     + listAllReviews(): List<Review>
     }
 
+ package "HU-6: Product" {
+    class Product {
+  - id : Integer
+  - name : String
+  - description : String
+  - price : double
+  - stock : int
+  - active : boolean
+  - categoryId : int
+  
+  + Product()
+  + Product(id:Integer, name:String, description:String, price:double, stock:int, active:boolean, categoryId:int)
+  + getId() : Integer
+  + setId(id:Integer) : void
+  + getName() : String
+  + setName(name:String) : void
+  + getDescription() : String
+  + setDescription(description:String) : void
+  + getPrice() : double
+  + setPrice(price:double) : void
+  + getStock() : int
+  + setStock(stock:int) : void
+  + isActive() : boolean
+  + setActive(active:boolean) : void
+  + getCategoryId() : int
+  + setCategoryId(categoryId:int) : void
+}
+
+interface IProduct {
+}
+
+interface JpaRepository<Product, Integer> {
+  + save(entity:Product) : Product
+  + findById(id:Integer) : Optional<Product>
+  + findAll() : List<Product>
+  + deleteById(id:Integer) : void
+}
+class ProductDTO {
+
+  - id : Integer
+  - name : String
+  - description : String
+  - price : double
+  - stock : int
+  - active : boolean
+  - categoryId : int
+
+  + Product()
+  + Product(id:Integer, name:String, description:String, price:double, stock:int, active:boolean, categoryId:int)
+  + getId() : Integer
+  + setId(id:Integer) : void
+  + getName() : String
+  + setName(name:String) : void
+  + getDescription() : String
+  + setDescription(description:String) : void
+  + getPrice() : double
+  + setPrice(price:double) : void
+  + getStock() : int
+  + setStock(stock:int) : void
+  + isActive() : boolean
+  + setActive(active:boolean) : void
+  + getCategoryId() : int
+  + setCategoryId(categoryId:int) : void
+  
+}
+
+class ProductService {
+  - IProduct : repository
+
+  + createProduct(product:Product) : Product
+  + getProductById(id:Integer) : Product
+  + getAllProducts() : List<Product>
+  + updateProduct(product:Product) : Product
+  + deleteProduct(id:Integer) : void
+
+}
+
+  class ProductController {
+    - service : ProductService
+    + create(productDTO:ProductDTO) : ProductDTO
+    + getById(id:Integer) : ProductDTO
+    + getAll() : List<ProductDTO>
+    + update(productDTO:ProductDTO) : ProductDTO
+    + delete(id:Integer) : void
+  }
+
+
+  ' Relaciones
+  IProduct ..|> JpaRepository
+  ProductService --> IProduct
+  ProductService --> ProductDTO
+  ProductService --> Product
+  ProductController --> ProductService
+  ProductController --> ProductDTO
+
+}
+
 @enduml
