@@ -268,9 +268,32 @@ package "HU-10: Order" {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 @enduml
 >>>>>>> c66fc65062a466aedc0d5f6f86886d991798a693
 =======
+=======
+package "HU-6: Product" {
+
+    'Actors'
+    actor "User" as AdminUser
+
+    'Use Cases'
+    usecase "List product" as UCPr1
+    usecase "Edit product" as UCPr2
+    usecase "Delete product" as UCPr3
+    usecase "Create product" as UCPr4
+
+    'Relationships'
+    AdminUser --> UCPr1
+    AdminUser --> UCPr2
+    AdminUser --> UCPr3
+    AdminUser --> UCPr4
+}
+
+
+
+>>>>>>> 4145da4ad1e5216fd74295836b38c74642fe191e
   package "HU-16: ProductTracking" {
 
     'Actors'
