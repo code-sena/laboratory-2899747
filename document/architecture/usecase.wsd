@@ -117,4 +117,29 @@ SupportAgent --> UC4
     UC4 --> FeedbackModule
     Customer --> UC5
   }
+
+   package "HU-10: Order" {
+
+    'Actors'
+    actor "Customer" as CustomerO
+    actor "System" as SystemO
+
+    'Use Cases'
+    usecase "Register Order" as UCO1
+    usecase "Validate Order Data" as UCO2
+    usecase "Calculate Total" as UCO3
+    usecase "Register Order in Database" as UCO4
+    usecase "Cancel Order" as UCO5
+    usecase "View Orders" as UCO6
+
+    'Relationships'
+    CustomerO --> UCO1
+    CustomerO --> UCO5
+    CustomerO --> UCO6
+
+    UCO1 --> UCO2
+    UCO2 --> UCO3
+    UCO3 --> UCO4
+    UCO4 --> SystemO
+  }
 @enduml
