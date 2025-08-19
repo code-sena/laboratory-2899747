@@ -128,32 +128,52 @@ package "HU-3: Shipment" {
     usecase "Update Shipment Status" as UC4
   }
 
-  user --> UC1
-  UC1 --> UC2
-  UC1 --> UC3
-  UC1 --> UC4
+  User_S --> UC1_S
+  UC1_S --> UC2_S
+  UC1_S --> UC3_S
+  UC1_S --> UC4_S
 }
 
 package "HU-8: Inventory" {
 
-    'Actors
-    actor "Admin" as Admin
-    actor "System" as Sys
+  ' Actores
+  actor "Customer" as Customer_O
+  actor "System" as System_O
 
-    'Use Cases
-    usecase "Register Inventory" as UC1
-    usecase "Read Inventory" as UC2
-    usecase "Update Inventory" as UC3
-    usecase "Delete Inventory" as UC4
+  ' Casos de Uso
+  usecase "Register Order" as UCO1
+  usecase "Validate Order Data" as UCO2
+  usecase "Calculate Total" as UCO3
+  usecase "Register Order in Database" as UCO4
+  usecase "Cancel Order" as UCO5
+  usecase "View Orders" as UCO6
 
-    'Relations
-    Admin --> UC1
-    Admin --> UC2
-    Admin --> UC3
-    Admin --> UC4
+  ' Relaciones
+  Customer_O --> UCO1
+  Customer_O --> UCO5
+  Customer_O --> UCO6
 
-    Sys --> UC2
-    Sys --> UC3
-  }
+  UCO1 --> UCO2
+  UCO2 --> UCO3
+  UCO3 --> UCO4
+  UCO4 --> SystemO
+}
+
+package "HU-18: Return" {
+  actor "Customer" as CustomerR
+  actor "SupportAgent" as SupportAgentR
+
+  usecase "Request Return" as UCR1
+  usecase "View Return Status" as UCR2
+  usecase "Process Return" as UCR3
+  usecase "Update Return Status" as UCR4
+
+  CustomerR --> UCR1
+  CustomerR --> UCR2
+  SupportAgentR --> UCR3
+  SupportAgentR --> UCR4
+  UCR1 --> UCR3
+  UCR3 --> UCR4
+}
 
 @enduml
