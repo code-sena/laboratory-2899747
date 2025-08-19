@@ -1,6 +1,36 @@
 @startuml
   left to right direction
 
+  package "HU-3: Department" {
+
+    'Actors
+    actor "Admin User" as Admin
+    actor "System" as System
+
+    'Use Cases
+    usecase "Register Department" as UC1
+    usecase "Update Department" as UC2
+    usecase "Deactivate Department" as UC3
+    usecase "View Departments" as UC4
+    usecase "Validate Uniqueness & Format" as UC5
+    usecase "Link Department to Country" as UC6
+
+    'Relationships
+    Admin --> UC1
+    Admin --> UC2
+    Admin --> UC3
+    Admin --> UC4
+
+    UC1 --> UC5
+    UC1 --> UC6
+
+    UC2 --> UC5
+    UC2 --> UC6
+
+    System --> UC5
+    System --> UC6
+  }
+  
   package "HU-22: Notification" {
 
     'Actors'
