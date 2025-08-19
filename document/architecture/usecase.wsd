@@ -278,6 +278,30 @@ package "HU-18: Return" {
   UCR3 --> UCR4
 }
 
+package "HU-5: Neighborhood Registration" {
+
+  'Actors'
+  actor "Admin User" as Admin
+  actor "External Geo Service" as GeoService
+
+  'Use Cases'
+  usecase "Register Neighborhood" as UC1
+  usecase "Validate Coordinates" as UC2
+  usecase "Associate with City" as UC3
+  usecase "List Registered Neighborhoods" as UC4
+
+  'Relationships'
+  Admin --> UC1
+  Admin --> UC4
+
+  UC1 --> UC2
+  UC2 --> GeoService
+  UC2 .> UC4 : <<extends>>
+  UC3 <.. UC4 : <<includes>>
+
+  UC1 --> UC3
+}
+
   package "HU-16: ProductTracking" {
 
     'Actors'
