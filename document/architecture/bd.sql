@@ -3,6 +3,24 @@ DROP DATABASE IF EXISTS shopping_cart;
 CREATE DATABASE shopping_cart;
 USE shopping_cart;
 
+CREATE TABLE Department (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    active BOOLEAN DEFAULT TRUE,
+    country_id INT NOT NULL,
+    FOREIGN KEY (country_id) REFERENCES Country(id)
+);
+
+CREATE TABLE Order(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    customer_id INT NOT NULL,
+    order_date DATETIME NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    total DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES Customer(id)
+);
+
+
 -- Tables
 CREATE TABLE payment (
   id INT NOT NULL AUTO_INCREMENT,
@@ -14,12 +32,4 @@ CREATE TABLE payment (
   PRIMARY KEY (id),
   FOREIGN KEY (order_id) REFERENCES order(id),
   FOREIGN KEY (payment_method_id) REFERENCES payment_method(id)
-);
-
-CREATE TABLE Inventory (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    product_id INT NOT NULL,
-    quantity INT NOT NULL,
-    last_update DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (product_id) REFERENCES Product(id)
 );
