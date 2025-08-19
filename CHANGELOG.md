@@ -1,8 +1,0 @@
-Rules
-
-Documents
-
-Banckend
-
-Frontend
-
