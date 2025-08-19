@@ -1,9 +1,8 @@
 @startuml
   left to right direction
+package "HU-3: Department" {
 
-  package "HU-3: Department" {
-
-    'Actors
+    ctors
     actor "Admin User" as Admin
     actor "System" as System
 
@@ -30,7 +29,6 @@
     System --> UC5
     System --> UC6
   }
-  
   package "HU-22: Notification" {
 
     'Actors'
