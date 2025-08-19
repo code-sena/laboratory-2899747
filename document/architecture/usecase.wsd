@@ -158,9 +158,27 @@ package "HU-10: Order" {
   Customer_O --> UCO5
   Customer_O --> UCO6
 
-    UCO1 --> UCO2
-    UCO2 --> UCO3
-    UCO3 --> UCO4
-    UCO4 --> SystemO
-  }
+  UCO1 --> UCO2
+  UCO2 --> UCO3
+  UCO3 --> UCO4
+  UCO4 --> SystemO
+}
+
+package "HU-18: Return" {
+  actor "Customer" as CustomerR
+  actor "SupportAgent" as SupportAgentR
+
+  usecase "Request Return" as UCR1
+  usecase "View Return Status" as UCR2
+  usecase "Process Return" as UCR3
+  usecase "Update Return Status" as UCR4
+
+  CustomerR --> UCR1
+  CustomerR --> UCR2
+  SupportAgentR --> UCR3
+  SupportAgentR --> UCR4
+  UCR1 --> UCR3
+  UCR3 --> UCR4
+}
+
 @enduml
