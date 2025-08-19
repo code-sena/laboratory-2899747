@@ -3,6 +3,14 @@ DROP DATABASE IF EXISTS shopping_cart;
 CREATE DATABASE shopping_cart;
 USE shopping_cart;
 
+CREATE TABLE Department (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    active BOOLEAN DEFAULT TRUE,
+    country_id INT NOT NULL,
+    FOREIGN KEY (country_id) REFERENCES Country(id)
+);
+
 -- Tables
 CREATE TABLE payment (
   id INT NOT NULL AUTO_INCREMENT,
@@ -16,11 +24,18 @@ CREATE TABLE payment (
   FOREIGN KEY (payment_method_id) REFERENCES payment_method(id)
 );
 
-
-create table city (
-    id int primary key auto_increment,
-    name varchar(100) not null unique,
-    active boolean default true,
-    department_id int not null,
-    foreign key (department_id) references department(id)
+-- Tabla de reviews
+CREATE TABLE review (
+  id INT NOT NULL AUTO_INCREMENT,
+  product_id INT NOT NULL,
+  customer_id INT NOT NULL,
+  rating INT NOT NULL CHECK (rating BETWEEN 1 AND 5),
+  comment TEXT,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  feedback_id INT,
+  PRIMARY KEY (id),
+  FOREIGN KEY (product_id) REFERENCES product(id),
+  FOREIGN KEY (customer_id) REFERENCES customer(id),
+  FOREIGN KEY (feedback_id) REFERENCES feedback(id)
 );
+
