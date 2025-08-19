@@ -35,6 +35,39 @@ package "HU-3: Department" {
 }
 
 ' =========================================================================
+' PAQUETE: HU-4: City (Ciudad)
+' =========================================================================
+package "HU-4: City" {
+
+  ' Actores
+  actor "Admin User" as Admin_C
+  actor "System" as System_C
+
+  ' Casos de Uso
+  usecase "Register City" as UC1_C
+  usecase "Update City" as UC2_C
+  usecase "Deactivate City" as UC3_C
+  usecase "View Cities" as UC4_C
+  usecase "Validate City Fields" as UC5_C
+  usecase "Link City to Department" as UC6_C
+
+  ' Relaciones
+  Admin_C --> UC1_C
+  Admin_C --> UC2_C
+  Admin_C --> UC3_C
+  Admin_C --> UC4_C
+
+  UC1_C --> UC5_C
+  UC1_C --> UC6_C
+
+  UC2_C --> UC5_C
+  UC2_C --> UC6_C
+
+  System_C --> UC5_C
+  System_C --> UC6_C
+}
+
+' =========================================================================
 ' PAQUETE: HU-22: Notification (Notificación) - MERGED
 ' =========================================================================
 package "HU-22: Notification" {
@@ -180,5 +213,7 @@ package "HU-18: Return" {
   UCR1 --> UCR3
   UCR3 --> UCR4
 }
+
+
 
 @enduml
